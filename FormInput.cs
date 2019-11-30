@@ -1,4 +1,3 @@
-﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -70,6 +69,7 @@ namespace at.jku.ssw.Coco
                     Console.WriteLine("You have a long method at " + badToken.line + " " + badToken.col);
                 }
             }
+            Console.Read();
             //Console.WriteLine(parser.errors.count + " errors detected");
             int a = 3 - 4;
             a = 3 * 4;

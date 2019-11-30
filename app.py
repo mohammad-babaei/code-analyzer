@@ -4,6 +4,7 @@ from flask_codemirror.fields import CodeMirrorField
 from wtforms.fields import SubmitField
 from flask_codemirror import CodeMirror
 from flask_bootstrap import Bootstrap
+import subprocess
 
 SECRET_KEY = 'secret!'
 CODEMIRROR_LANGUAGES = ['clike', 'html']
@@ -32,8 +33,16 @@ def index():
     if form.validate_on_submit():
         inputText = form.source_code.data
         #run the c# code here
-        #output = your output
-        output = 'this is the output of the analize!'
+        with open('FormInput.cs', 'w') as f:
+            f.write(inputText)
+
+        output = subprocess.check_output(["./c# project/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+        
+        lis = output.split('\r\n')
+        paragraphs = []
+        for l in lis:
+            paragraphs.append("<p>{}</p>".format(l))
+        output = " ".join(paragraphs)
     return render_template('index.html', form=form, output = output)
 
 @app.route('/aboutUs', methods=['GET', ])

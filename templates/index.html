@@ -52,7 +52,7 @@
 
             {% if output != None %}
             <div class="alert alert-danger" role="alert">
-                {{output}}
+                {{output|safe}}
             </div>
             {% endif %}
             <div style="text-align:center;">
