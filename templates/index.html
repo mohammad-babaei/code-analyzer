@@ -50,9 +50,44 @@
 
             <br>
 
-            {% if output != None %}
-            <div class="alert alert-danger" role="alert">
-                {{output|safe}}
+            {% if NoneEndglishID != None %}
+            <h2>Results</h2>
+            <h3>Bad identifiers</h3>
+            <h4>
+                Identifiers are checked in a dictionary if they are not english then we list them below.
+            </h4>
+            <div class="alert alert-danger" role="alert" style="height:150px;overflow-y: scroll;">
+                {{NoneEndglishID|safe}}
+            </div>
+            {% endif %}
+
+            {% if LongMethods != None %}
+            <h3>Long Methods</h3>
+            <h4>
+                Methods longer than 24 lines are listed below.
+            </h4>
+            <div class="alert alert-warning" role="alert" style="height:150px;overflow-y: scroll;">
+                {{LongMethods|safe}}
+            </div>
+            {% endif %}
+
+            {% if MethodsExecessiveParameters != None %}
+            <h3>Execessive Parameters</h3>
+            <h4>
+                Methods with more than 4 parameters are reported.
+            </h4>
+            <div class="alert alert-info" role="alert" style="height:150px;overflow-y: scroll;">
+                {{MethodsExecessiveParameters|safe}}
+            </div>
+            {% endif %}
+
+            {% if ListOfTokens != None %}
+            <h3>List of Tokens</h3>
+            <h4>
+                All of the tokens are here.
+            </h4>
+            <div class="alert alert-success" role="alert" style="height:150px;overflow-y: scroll;">
+                {{ListOfTokens|safe}}
             </div>
             {% endif %}
             <div style="text-align:center;">
