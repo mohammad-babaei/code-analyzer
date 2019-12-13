@@ -15,6 +15,8 @@ namespace at.jku.ssw.Coco
             {
                 Console.WriteLine(token.ToString());
             }
+            Console.WriteLine("-------------------------------------------------");
+
             CleanCodeAnalyzer analyzer = new CleanCodeAnalyzer(generator);
 
             var longMethods = analyzer.FindLongMethods();
@@ -28,7 +30,28 @@ namespace at.jku.ssw.Coco
                     Console.WriteLine("You have a long method at (" + longMethodToken.Line + ", " + longMethodToken.Col + ")");
                 }
             }
+
+            Console.WriteLine("-------------------------------------------------");
+
+            var nonEnglish = analyzer.FindNonEnglishIdentifiers();
+
+            Console.WriteLine("Non-English Identifiers:");
+
+            foreach (TokenEntity token in nonEnglish)
+            {
+                Console.WriteLine(token.Value);
+            }
+
+            Console.WriteLine("-------------------------------------------------");
+            
+            var longs = analyzer.FindExcessiveMethodParameter();
+
+            foreach (TokenEntity parameterToken in longs)
+            {
+                Console.WriteLine("Method with too many params at (" + parameterToken.Line + ", " + parameterToken.Col);
+            }
+            Console.WriteLine("done");
+            Console.Read();
         }
-        
     }
 }

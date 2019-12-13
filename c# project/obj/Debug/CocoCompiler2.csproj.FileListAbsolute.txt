@@ -12,3 +12,6 @@ C:\Users\Mobin\Desktop\coco\c# project\obj\Debug\CocoCompiler2.csproj.CoreCompil
 C:\Users\Mobin\Desktop\coco\c# project\obj\Debug\CocoCompiler2.exe
 C:\Users\Mobin\Desktop\coco\c# project\obj\Debug\CocoCompiler2.pdb
 C:\Users\Mobin\Desktop\coco\c# project\bin\Debug\CocoCompiler2.pdb
+C:\Users\Mobin\Desktop\coco\c# project\bin\Debug\NetSpell.SpellChecker.dll
+C:\Users\Mobin\Desktop\coco\c# project\bin\Debug\NetSpell.SpellChecker.xml
+C:\Users\Mobin\Desktop\coco\c# project\obj\Debug\CocoCompiler2.csproj.CopyComplete
