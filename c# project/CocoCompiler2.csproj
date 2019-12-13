@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CleanCodeAnalyzer.cs" />
     <Compile Include="DFA.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="ParserGen.cs" />
@@ -50,6 +51,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner.cs" />
     <Compile Include="Tab.cs" />
+    <Compile Include="TokenEntity.cs" />
+    <Compile Include="TokenGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
