@@ -26,72 +26,43 @@ class MyForm(FlaskForm):
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     form = MyForm()
-    
-    if form.source_code.data == None:
-        sample = open('sampleToAnalize.cs', 'r')
-        form.source_code.data = sample.read()
+    sample = open('sampleToAnalize.cs', 'r')
+    # if sample.read() == form.source_code.data:
+    form.source_code.data = sample.read()
 
-    ListOfTokens = None
-    LongMethods = None
-    MethodsExecessiveParameters = None
-    NoneEndglishID = None
+    output = None
+    inputText = None
+    
     if form.validate_on_submit():
         inputText = form.source_code.data
         #run the c# code here
-        # with open('FormInput.cs', 'w') as f:
-        #     f.write(inputText)
+        with open('FormInput.cs', 'w') as f:
+            f.write(inputText)
 
-        # output = subprocess.check_output(["./c# project/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+        output = subprocess.check_output(["./c# project/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
         
+        output_list = output.split('-------------------------------------------------')
+
+        ListOfTokens = output_list[0]
+        LongMethods = output_list[1]
+        MethodsExecessiveParameters = output_list[2] 
+        NoneEndglishID = output_list[3]
+
+        print('len {}'.format(len(output_list)))
         # lis = output.split('\r\n')
         # paragraphs = []
         # for l in lis:
         #     paragraphs.append("<p>{}</p>".format(l))
         # output = " ".join(paragraphs)
-        ListOfTokens = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
         
-        LongMethods = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
+    return render_template('index.html', form=form, ListOfTokens = format_to_html_lines(ListOfTokens), LongMethods = format_to_html_lines(LongMethods), MethodsExecessiveParameters = format_to_html_lines(MethodsExecessiveParameters), NoneEndglishID = format_to_html_lines(NoneEndglishID))
 
-        MethodsExecessiveParameters = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
-
-        NoneEndglishID = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
-    return render_template('index.html', form=form, ListOfTokens = ListOfTokens, LongMethods = LongMethods, MethodsExecessiveParameters = MethodsExecessiveParameters, NoneEndglishID=NoneEndglishID)
+def format_to_html_lines(st):
+    lis = st.split('\r\n')
+    paragraphs = []
+    for l in lis:
+        paragraphs.append("<p>{}</p>".format(l))
+    return " ".join(paragraphs)
 
 @app.route('/aboutUs', methods=['GET', ])
 def about_us():
