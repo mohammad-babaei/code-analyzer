@@ -26,8 +26,10 @@ class MyForm(FlaskForm):
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     form = MyForm()
-    sample = open('sampleToAnalize.cs', 'r')
-    form.source_code.data = sample.read()
+    
+    if form.source_code.data == None:
+        sample = open('sampleToAnalize.cs', 'r')
+        form.source_code.data = sample.read()
 
     ListOfTokens = None
     LongMethods = None
