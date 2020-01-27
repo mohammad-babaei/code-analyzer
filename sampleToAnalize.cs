@@ -1,83 +1,122 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
-namespace at.jku.ssw.Coco
+namespace RoslynAnalyzer
 {
-    class Program
+    /*
+     * here is some code for you 
+     * and for cheking it works
+     */
+     // some simple code in comments
+    interface IInter1
     {
-        static Dictionary<int, String> kinds = new Dictionary<int, string> {
-            { 1, "Identifier" },
-            { 41, "operator" },
-            { 100, "semicolon" },
-            { 30, "openning parantheses" },
-            { 31, "closing parantheses" },
-            { 34, "openning curly brackets" },
-            { 35, "closing curly brackets" },
-            { 3, "string literal" },
-            { 18, "dot" },
-            { 2, "integer" },
-            { 17, "assignment operator" },
-        };
 
-        static List<Token> findLongMethodStartToken(List<Token> bracketTokens)
+    }
+
+    interface IInter2
+    {
+
+        int X { get; set; }
+    }
+
+    interface IInter3
+    {
+
+    }
+
+    class Code
+    {
+
+        static void parse()
         {
-            Stack<Token> S = new Stack<Token>();
-            List<Token> longTokens = new List<Token>();
-            foreach (Token t in bracketTokens)
-            {
-                if (t.val == "{")
-                {
-                    S.Push(t);
-                }
-                else
-                {
-                    Token tt = S.Pop();
-                    int lineDiff = t.line - tt.line;
-                    if (lineDiff > 24)
-                        longTokens.Add(tt);
-                }
-            }
-            return longTokens;
+            int a = 4;
         }
-
-        static void Main(string[] args)
+    void c()
         {
-            Scanner scanner = new Scanner(args[0]);
-            int ind = 1;
-            Token t = scanner.clean(scanner.NextToken());
-            List<Token> tokens = new List<Token>();
-            while (t.kind != 0)
+            try
             {
-                tokens.Add(scanner.clean(t));
-                String kind = "" + t.kind;
-                if (kinds.ContainsKey(t.kind))
-                {
-                    kind = kinds[t.kind];
-                }
-                Console.WriteLine("Token No " + ind++ + " -> (" + t.line + "," + t.col + ") " + kind + " " + t.val + " ");
-                t = scanner.clean(scanner.NextToken());
+                int a = 3;
+                a = a + 2;
+            }catch (Exception ex)
+            {
+                var s = ex;
+                int a = 4;
             }
-            List<Token> badTokens = findLongMethodStartToken(tokens.Where(tok => tok.kind == 34 || tok.kind == 35).ToList());
-            if (badTokens.Count == 0) {
-                Console.WriteLine("No methods with more than 24 lines were found");
+        }
+    int v(int r, int e)
+        {
+            int x;
+            Random rand = new Random();
+            if (rand.Next() > 11)
+            {
+                int a = 4;
+                string er = "asdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadfsdfsdfsdfsdfadfwerwerwerwerdfsdfsgsdfadgewafdsafdsgaegafasdfasdfasdfwegwgasgasdfasdgwgasdf";
+                string er2 = "asdfsdfaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadfsdfsdfsdfsdfadfwerwerwerwerdfsdfsgsdfadgewafdsafdsgaegafasdfasdfasdfwegwgasgasdfasdgwgasdf";
+                return 2;
             } else
             {
-                foreach (Token badToken in badTokens)
-                {
-                    Console.WriteLine("You have a long method at " + badToken.line + " " + badToken.col);
-                }
+                return 1;
             }
-            Console.Read();
-            //Console.WriteLine(parser.errors.count + " errors detected");
-            int a = 3 - 4;
-            a = 3 * 4;
-            bool b = (3 == 3);
-            a = 5 / 3;
-            a = 5 % 3;
+            try
+            {
+                int a = 3;
+                a = a + 2;
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+        void x(int x, bool flag)
+        {
 
         }
-        
+
+        void TestValueMethod()
+        {
+            int x = 10;
+            Debug.Assert(x > 20);
+            Debug.Assert(x % 2 == 2);
+        }
+
+        int y()
+        {
+            int x;
+            int a = 100;
+            if (a % 10 == 0)
+            {
+                if (a % 3 == 0)
+                {
+                    if (a % 5 == 0)
+                    {
+                        int setv = 122;
+                    }
+                }
+            }
+            Random rand = new Random();
+
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 20; j++)
+                {
+                    for (int k = 0; k < 40; k++)
+                    {
+
+                    }
+                }
+            }
+            if (rand.Next() > 11)
+            {
+                return 2;
+            } else
+            {
+                return 1;
+            }
+
+        }
     }
 }

@@ -50,17 +50,17 @@
 
             <br>
             {% if  Issues%}
-            {% for issue in Issues["issues"] %}
-            <h3><b>{{ issue['type'] }}</b></h3>
+            {% for issue in Issues["results"] %}
+            <h3><b>{{ issue['issueDetail']['type'] }}</b></h3>
             <br>
             <blockquote class="blockquote text-center">
-                <p class="mb-0">{{ issue['quote'] }}</p>
-                <footer class="blockquote-footer">{{ issue['author'] }}</footer>
+                <p class="mb-0">{{ issue['issueDetail']['quote'] }}</p>
+                <footer class="blockquote-footer">{{ issue['issueDetail']['author'] }}</footer>
             </blockquote>
 
 
             <div class="alert alert-danger" role="alert" style="height:150px;overflow-y: scroll;">
-                <b>{{ issue['title'] }}</b>
+                <b>{{ issue['issueDetail']['title'] }}</b>
                 <br>
                 {% for warning in issue['warnings'] %}
                 {{warning["value"]|safe}}

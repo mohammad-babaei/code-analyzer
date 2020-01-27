@@ -36,27 +36,13 @@ def index():
     if form.validate_on_submit():
         inputText = form.source_code.data
 
-        csharp_output_string = """{
-                    "issues": [
-                        {
-                        "id": 3,
-                        "type":"Single Responsibility",
-                        "quote": "Functions should single responsi.....",
-                        "author": "Robert C Martin",
-                        "title": "Looks like your code breaks single responsibility in these areas:",
-                        "warnings": [
-                            {
-                            "id": 1,
-                            "value": "at (12, 10): void funct2(int a, int b) has multiple return statements"
-                            },
-                            {
-                            "id": 2,
-                            "value": "at (8, 10): int trace(int x, string foo) has multiple return statements"
-                            }
-                        ]
-                        }
-                    ]
-                    }"""
+        with open('FormInput.cs', 'w', encoding = 'utf-8') as f:
+            text = inputText.replace('\r\n', '\n')
+            f.write(text)
+        
+        output = subprocess.check_output(["./c# project/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
+
+        csharp_output_string = output
         
         csharp_output_json = json.loads(csharp_output_string)
         
