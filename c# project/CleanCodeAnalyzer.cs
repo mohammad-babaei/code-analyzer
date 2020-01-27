@@ -16,7 +16,7 @@ namespace CocoCompiler2
         {
             this.tokenGenerator = tokenGenerator;
             oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
-            oDict.DictionaryFile = "..\\..\\packages\\NetSpell.2.1.7\\dic\\en-US.dic";
+            oDict.DictionaryFile = "c# project\\packages\\NetSpell.2.1.7\\dic\\en-US.dic";
             oDict.Initialize();
             oSpell = new NetSpell.SpellChecker.Spelling();
             oSpell.Dictionary = oDict;

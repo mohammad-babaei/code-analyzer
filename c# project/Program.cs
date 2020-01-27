@@ -22,12 +22,12 @@ namespace at.jku.ssw.Coco
             var longMethods = analyzer.FindLongMethods();
 
             if (longMethods.Count == 0) {
-                Console.WriteLine("No methods with more than 24 lines were found");
+                Console.WriteLine("No long methods were found. Good job!");
             } else
             {
                 foreach (TokenEntity longMethodToken in longMethods)
                 {
-                    Console.WriteLine("You have a long method at (" + longMethodToken.Line + ", " + longMethodToken.Col + ")");
+                    Console.WriteLine("Long method found at (" + longMethodToken.Line + ", " + longMethodToken.Col + ")");
                 }
             }
 
@@ -35,23 +35,31 @@ namespace at.jku.ssw.Coco
 
             var nonEnglish = analyzer.FindNonEnglishIdentifiers();
 
-            Console.WriteLine("Non-English Identifiers:");
-
-            foreach (TokenEntity token in nonEnglish)
+            if (nonEnglish.Count == 0)
             {
-                Console.WriteLine(token.Value);
+                Console.WriteLine("No non-English identifiers were found. Good job!");
+            } else
+            {
+                foreach (TokenEntity token in nonEnglish)
+                {
+                    Console.WriteLine("Non-English identifier " + token.Value + " at (" + token.Line + ", " + token.Col + ")");
+                }
             }
-
+            
             Console.WriteLine("-------------------------------------------------");
             
             var longs = analyzer.FindExcessiveMethodParameter();
 
-            foreach (TokenEntity parameterToken in longs)
+            if (longs.Count == 0)
             {
-                Console.WriteLine("Method with too many params at (" + parameterToken.Line + ", " + parameterToken.Col);
+                Console.WriteLine("No method with excessive number of parameter was found. Good job!");
+            } else
+            {
+                foreach (TokenEntity parameterToken in longs)
+                {
+                    Console.WriteLine("Method with too many params at (" + parameterToken.Line + ", " + parameterToken.Col);
+                }
             }
-            Console.WriteLine("done");
-            Console.Read();
         }
     }
 }
