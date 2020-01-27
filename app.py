@@ -5,6 +5,7 @@ from wtforms.fields import SubmitField
 from flask_codemirror import CodeMirror
 from flask_bootstrap import Bootstrap
 import subprocess
+import json
 
 SECRET_KEY = 'secret!'
 CODEMIRROR_LANGUAGES = ['clike', 'html']
@@ -31,67 +32,35 @@ def index():
         sample = open('sampleToAnalize.cs', 'r')
         form.source_code.data = sample.read()
 
-    ListOfTokens = None
-    LongMethods = None
-    MethodsExecessiveParameters = None
-    NoneEndglishID = None
+    csharp_output_json = None
     if form.validate_on_submit():
         inputText = form.source_code.data
-        #run the c# code here
-        # with open('FormInput.cs', 'w') as f:
-        #     f.write(inputText)
 
-        # output = subprocess.check_output(["./c# project/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+        csharp_output_string = """{
+                    "issues": [
+                        {
+                        "id": 3,
+                        "type":"Single Responsibility",
+                        "quote": "Functions should single responsi.....",
+                        "author": "Robert C Martin",
+                        "title": "Looks like your code breaks single responsibility in these areas:",
+                        "warnings": [
+                            {
+                            "id": 1,
+                            "value": "at (12, 10): void funct2(int a, int b) has multiple return statements"
+                            },
+                            {
+                            "id": 2,
+                            "value": "at (8, 10): int trace(int x, string foo) has multiple return statements"
+                            }
+                        ]
+                        }
+                    ]
+                    }"""
         
-        # lis = output.split('\r\n')
-        # paragraphs = []
-        # for l in lis:
-        #     paragraphs.append("<p>{}</p>".format(l))
-        # output = " ".join(paragraphs)
-        ListOfTokens = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
+        csharp_output_json = json.loads(csharp_output_string)
         
-        LongMethods = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
-
-        MethodsExecessiveParameters = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
-
-        NoneEndglishID = 'SELECT action.descr as "action", <br>'\
-                    'role.id as role_id,<br>'\
-                    'role.descr as role<br>'\
-                    'FROM <br>'\
-                    'public.role_action_def,<br>'\
-                    'public.role,<br>'\
-                    'public.record_def, <br>'\
-                    'public.action<br>'\
-                    'WHERE role.id = role_action_def.role_id AND<br>'\
-                    'record_def.id = role_action_def.def_id AND<br>'
-    return render_template('index.html', form=form, ListOfTokens = ListOfTokens, LongMethods = LongMethods, MethodsExecessiveParameters = MethodsExecessiveParameters, NoneEndglishID=NoneEndglishID)
+    return render_template('index.html', form=form, Issues = csharp_output_json)
 
 @app.route('/aboutUs', methods=['GET', ])
 def about_us():

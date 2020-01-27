@@ -49,9 +49,30 @@
             {{ form.source_code }}
 
             <br>
+            {% if  Issues%}
+            {% for issue in Issues["issues"] %}
+            <h3><b>{{ issue['type'] }}</b></h3>
+            <br>
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">{{ issue['quote'] }}</p>
+                <footer class="blockquote-footer">{{ issue['author'] }}</footer>
+            </blockquote>
 
-            {% if NoneEndglishID != None %}
-            <h2>Results</h2>
+
+            <div class="alert alert-danger" role="alert" style="height:150px;overflow-y: scroll;">
+                <b>{{ issue['title'] }}</b>
+                <br>
+                {% for warning in issue['warnings'] %}
+                {{warning["value"]|safe}}
+                <br>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% endif %}
+
+
+            <!-- {% if NoneEndglishID != None %}
+            
             <h3>Bad identifiers</h3>
             <h4>
                 Identifiers are checked in a dictionary if they are not english then we list them below.
@@ -89,7 +110,7 @@
             <div class="alert alert-success" role="alert" style="height:150px;overflow-y: scroll;">
                 {{ListOfTokens|safe}}
             </div>
-            {% endif %}
+            {% endif %} -->
             <div style="text-align:center;">
                 <input type="submit" value="Analize Code" class="btn btn-primary">
                 <button type="button" id="clear_button" class="btn btn-danger">clear editor</button>
