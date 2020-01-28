@@ -40,7 +40,7 @@ def index():
             text = inputText.replace('\r\n', '\n')
             f.write(text)
         
-        output = subprocess.check_output(["./c# project/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
+        output = subprocess.check_output(["mono", "cproject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
 
         csharp_output_string = output
         
