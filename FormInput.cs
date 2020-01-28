@@ -83,7 +83,7 @@ namespace RoslynAnalyzer
             Debug.Assert(x % 2 == 2);
         }
 
-        int y()
+        int y(int xx, int yy, int zz, int pp)
         {
             int x;
             int a = 100;
