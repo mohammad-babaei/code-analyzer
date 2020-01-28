@@ -72,7 +72,7 @@
 
             {% if  CocoIssues%}
             {% for issue in CocoIssues["results"] %}
-            <h3><b>{{ issue['issueDetail']['type'] }}</b></h3>
+            <h3><b>Coco Output: {{ issue['issueDetail']['type'] }}</b></h3>
             <br>
             <blockquote class="blockquote text-center">
                 <p class="mb-0">{{ issue['issueDetail']['quote'] }}</p>
