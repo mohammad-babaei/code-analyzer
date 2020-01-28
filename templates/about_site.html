@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}csharp coco{% endblock %}
+{% block title %}csharp Code Clean and Proper{% endblock %}
 
 {% block head %}
 {{super()}}
@@ -18,13 +18,13 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Coco CC</a>
+            <a class="navbar-brand" href="/">Code Clean and Proper</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li><a href="/aboutUs">About us</a></li>
-                <li class="active"><a href="/this-site">About this site</a></li>
+                <li class="active"><a href="/this-site">Documentation</a></li>
             </ul>
         </div>
     </div>
@@ -34,8 +34,17 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <h1>About site</h1>
-        <h4>ino khodet benebis mobin</h4>
+        <h1>Project Docs</h1>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <a href="{{ url_for('static', filename='doc.pdf') }}"><b>Persian Documentation Download link</b></a>
+        <br>
+        <br>
+        <a href="{{ url_for('static', filename='docen.pdf') }}"><b>English Documentation Download link</b></a>
+        <h4></h4>
     </div>
 </div>
 
