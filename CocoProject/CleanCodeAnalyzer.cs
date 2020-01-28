@@ -17,12 +17,12 @@ namespace CocoCompiler2
         public CleanCodeAnalyzer(TokenGenerator tokenGenerator)
         {
             this.tokenGenerator = tokenGenerator;
-            oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
-            //If you're running this project separately you need to change this to relative path.
-            oDict.DictionaryFile = "CocoProject/packages/NetSpell.2.1.7/dic/en-US.dic";
-            oDict.Initialize();
-            oSpell = new NetSpell.SpellChecker.Spelling();
-            oSpell.Dictionary = oDict;
+            // oDict = new NetSpell.SpellChecker.Dictionary.WordDictionary();
+            // //If you're running this project separately you need to change this to relative path.
+            // oDict.DictionaryFile = "CocoProject/packages/NetSpell.2.1.7/dic/en-US.dic";
+            // oDict.Initialize();
+            // oSpell = new NetSpell.SpellChecker.Spelling();
+            // oSpell.Dictionary = oDict;
         }
 
         public List<TokenEntity> FindLongMethods()

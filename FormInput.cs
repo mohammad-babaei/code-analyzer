@@ -31,12 +31,17 @@ namespace RoslynAnalyzer
 
     class Code
     {
-
-        static void parse()
+        static int astaticvaribale =4;
+        static int asdff =4;
+        static void parse(int param1, int param2)
         {
             int a = 4;
         }
-    void c()
+        static void parse2()
+        {
+            int b = 4;
+        }
+        void c()
         {
             try
             {
@@ -48,7 +53,7 @@ namespace RoslynAnalyzer
                 int a = 4;
             }
         }
-    int v(int r, int e)
+	int v(int r, int e)
         {
             int x;
             Random rand = new Random();
@@ -71,9 +76,24 @@ namespace RoslynAnalyzer
             {
             }
         }
+        public static void Sum(out int G)
+        {
+            G = 80;
+            G += G;
+        }
+        public static void asd(ref int G)
+        {
+            G = 80;
+            G += G;
+        }
         void x(int x, bool flag)
         {
 
+        }
+
+        void getAndpost(int x, bool flag)
+        {
+            int a = 4;
         }
 
         void TestValueMethod()
@@ -83,7 +103,12 @@ namespace RoslynAnalyzer
             Debug.Assert(x % 2 == 2);
         }
 
-        int y(int xx, int yy, int zz, int pp)
+        void testAnddo(int x, bool flag)
+        {
+            int a = 4;
+        }
+
+        int y()
         {
             int x;
             int a = 100;
