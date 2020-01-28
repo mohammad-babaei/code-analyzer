@@ -70,6 +70,27 @@
             {% endfor %}
             {% endif %}
 
+            {% if  CocoIssues%}
+            {% for issue in CocoIssues["results"] %}
+            <h3><b>{{ issue['issueDetail']['type'] }}</b></h3>
+            <br>
+            <blockquote class="blockquote text-center">
+                <p class="mb-0">{{ issue['issueDetail']['quote'] }}</p>
+                <footer class="blockquote-footer">{{ issue['issueDetail']['author'] }}</footer>
+            </blockquote>
+
+
+            <div class="alert alert-danger" role="alert" style="height:150px;overflow-y: scroll;">
+                <b>{{ issue['issueDetail']['title'] }}</b>
+                <br>
+                {% for warning in issue['warnings'] %}
+                {{warning["value"]|safe}}
+                <br>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            {% endif %}
+
 
             <!-- {% if NoneEndglishID != None %}
             

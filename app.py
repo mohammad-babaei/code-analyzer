@@ -6,6 +6,7 @@ from flask_codemirror import CodeMirror
 from flask_bootstrap import Bootstrap
 import subprocess
 import json
+from sys import platform
 
 SECRET_KEY = 'secret!'
 CODEMIRROR_LANGUAGES = ['clike', 'html']
@@ -33,6 +34,8 @@ def index():
         form.source_code.data = sample.read()
 
     csharp_output_json = None
+    coco_output_json = None
+
     if form.validate_on_submit():
         inputText = form.source_code.data
 
@@ -40,13 +43,21 @@ def index():
             text = inputText.replace('\r\n', '\n')
             f.write(text)
         
-        output = subprocess.check_output(["mono", "cproject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
+        if platform == "win32" or platform == "cygwin":
+          output = subprocess.check_output(["./RoslynProject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
+          output2 = subprocess.check_output(["./CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+        else:
+          output = subprocess.check_output(["mono", "RoslynProject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
+          output2 = subprocess.check_output(["mono", "CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
 
         csharp_output_string = output
-        
+        coco_output = output2
+        print(output2)
+
         csharp_output_json = json.loads(csharp_output_string)
-        
-    return render_template('index.html', form=form, Issues = csharp_output_json)
+        coco_output_json = json.loads(coco_output)
+
+    return render_template('index.html', form=form, Issues = csharp_output_json, CocoIssues = coco_output_json)
 
 @app.route('/aboutUs', methods=['GET', ])
 def about_us():
