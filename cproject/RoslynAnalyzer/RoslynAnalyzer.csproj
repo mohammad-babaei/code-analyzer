@@ -101,6 +101,7 @@
     <Compile Include="CleanCodeAnalyzers\Analyzers\BooleanParameterAnalyzer.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\CommentPercentage.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\EmptyCatch.cs" />
+    <Compile Include="CleanCodeAnalyzers\Analyzers\FuncContainAnd.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\FunctionArgCounter.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\LineCount.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\LongClasses.cs" />
@@ -110,9 +111,12 @@
     <Compile Include="CleanCodeAnalyzers\Analyzers\NestedConditions.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\NestedLoops.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\OneLineBranchStatement.cs" />
+    <Compile Include="CleanCodeAnalyzers\Analyzers\RefOutParameters.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\SingleAssertPerTest.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\SingleReturnMethodAnalyzer.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\StaticNotVoid.cs" />
+    <Compile Include="CleanCodeAnalyzers\Analyzers\StaticOneParameter.cs" />
+    <Compile Include="CleanCodeAnalyzers\Analyzers\StaticState.cs" />
     <Compile Include="CleanCodeAnalyzers\Analyzers\TryCatchFucntionCall.cs" />
     <Compile Include="CleanCodeAnalyzers\Data\CodeDiagnosticResponse.cs" />
     <Compile Include="CleanCodeAnalyzers\BaseAnalyzer.cs" />

@@ -52,7 +52,7 @@ namespace RoslynAnalyzer.CleanCodeAnalyzers.Analyzers
                     }
                 }
             }
-            return new AnalyzeResult(IssueDetail.OneLineBranchStatements, warnings);
+            return new AnalyzeResult(IssueDetail.TryCatchFucntionCalls, warnings);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace RoslynAnalyzer.CleanCodeAnalyzers.Analyzers
 
             }
             warnings.Add(new Warning(
-                            "You have " + zero_arg + " methods with zero arguments\nYou have " + one_arg + " methods with one arguments\nYou have " + two_arg + " methods with two arguments\nYou have " + three_arg + " funcs with three arguments\n"
+                            "You have " + zero_arg + " methods with zero arguments<br>You have " + one_arg + " methods with one arguments<br>You have " + two_arg + " methods with two arguments<br>You have " + three_arg + " funcs with three arguments<br>"
                         ));
 
             return new AnalyzeResult(IssueDetail.FunctionArgCounters, warnings);

@@ -86,7 +86,16 @@ namespace RoslynAnalyzer
 
                 new LongMethods(tree),
 
-                new LineCount(tree)
+                new LineCount(tree),
+
+                new StaticOneParameter(tree),
+
+                new StaticState(tree),
+
+                new RefOutParameters(tree),
+
+                new FuncContainAnd(tree)
+
         };
 
             var diagnoseResponse = CodeDiagnosticResponse.fromAnalyzers(
@@ -110,6 +119,20 @@ namespace RoslynAnalyzer
             LineCount lineCount = new LineCount(tree);
             AnalyzeResult lineCountResult = lineCount.analyze();
 
+            StaticOneParameter staticOneParameter = new StaticOneParameter(tree);
+            AnalyzeResult staticOneParatemerResult = staticOneParameter.analyze();
+
+            StaticState staticState = new StaticState(tree);
+            AnalyzeResult staticStateStaticResult = staticState.analyze();
+
+            RefOutParameters refOutParameters = new RefOutParameters(tree);
+            AnalyzeResult refOutParametersResult = refOutParameters.analyze();
+
+            FuncContainAnd funcContainAnd = new FuncContainAnd(tree);
+            AnalyzeResult funcContainAndResult = funcContainAnd.analyze();
+
+
+            Console.Read();
             
         }
     }

@@ -146,6 +146,34 @@ namespace RoslynAnalyzer.CleanCodeAnalyzers.Data
             title: "Line count of the file",
             type: "File Line Count"
             );
+        public static IssueDetail StaticNoParameters = new IssueDetail(
+            id: 17,
+            quote: "Static methods should have at least one parameter input",
+            author: "",
+            title: "You have static methods without parameters at :",
+            type: "Static method parameter"
+            );
+        public static IssueDetail StaticState = new IssueDetail(
+            id: 18,
+            quote: "Static fields introduce global state and so should be avoided",
+            author: "",
+            title: "You have static fields and states at: ",
+            type: "Static fields and global states"
+            );
+        public static IssueDetail RefOutParameter = new IssueDetail(
+            id: 19,
+            quote: "Method parameters must not use REF or OUT parameters; all results should be via a return",
+            author: "",
+            title: "You have methods with out or ref keyword at line: ",
+            type: "Ref and Out keywords in func params"
+            );
+        public static IssueDetail ContainsAnd = new IssueDetail(
+            id: 20,
+            quote: "Method names that contain 'And' often indicate a method is doing more than one thing. Consider refacting into two methods.",
+            author: "",
+            title: "You have methods with 'And' in fucntion identifire at line: ",
+            type: "Single responsibility"
+            );
 
     }
 }

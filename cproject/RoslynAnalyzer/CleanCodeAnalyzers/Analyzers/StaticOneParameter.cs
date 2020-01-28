@@ -10,37 +10,38 @@ using RoslynAnalyzer.CleanCodeAnalyzers.Data;
 
 namespace RoslynAnalyzer.CleanCodeAnalyzers.Analyzers
 {
-    class StaticNotVoid : BaseAnalyzer
+    class StaticOneParameter : BaseAnalyzer
     {
-        public StaticNotVoid(SyntaxTree syntaxTree) : base(syntaxTree)
+        public StaticOneParameter(SyntaxTree syntaxTree) : base(syntaxTree)
         {
-        }
-        public void kos()
-        {
-
         }
 
         public override AnalyzeResult analyze()
         {
-            var root = this.syntaxTree.GetRoot();
+            var root = syntaxTree.GetRoot();
             var staticMethods = root.DescendantNodes()
             .OfType<MethodDeclarationSyntax>()
             .Where(method =>
                 method.Modifiers.Where(modifier =>
                     modifier.Kind() == SyntaxKind.StaticKeyword)
                 .Any());
-            List<Warning> warnings = new List<Warning>();
 
-            foreach (var method in staticMethods)
+            List<Warning> warnings = new List<Warning>();
+            foreach(var method in staticMethods)
             {
-                if(method.ToString().Contains("void "))
+                int count = method.ParameterList.Parameters.Count;
+                if (count < 1)
                 {
                     warnings.Add(new Warning(
-                "You have static method declared as void at line " + GetLineNumber(syntaxTree, method)));
+                        "You got static methods without parameters at line: " + GetLineNumber(syntaxTree, method)+"\n"
+                        ));
+
                 }
-                
             }
+
             return new AnalyzeResult(IssueDetail.StaticNoParameters, warnings);
+
+
         }
     }
 }
