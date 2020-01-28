@@ -45,16 +45,17 @@ def index():
         
         if platform == "win32" or platform == "cygwin":
           output = subprocess.check_output(["./RoslynProject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
-          # output2 = subprocess.check_output(["./CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+          output2 = subprocess.check_output(["./CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
         else:
           output = subprocess.check_output(["mono", "RoslynProject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
-          # output2 = subprocess.check_output(["mono", "CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+          output2 = subprocess.check_output(["mono", "CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
 
         csharp_output_string = output
 
         csharp_output_json = json.loads(csharp_output_string)
+        coco_output_json = json.loads(output2)
 
-    return render_template('index.html', form=form, Issues = csharp_output_json)
+    return render_template('index.html', form=form, Issues = csharp_output_json, CocoIssues = coco_output_json)
 
 @app.route('/aboutUs', methods=['GET', ])
 def about_us():
