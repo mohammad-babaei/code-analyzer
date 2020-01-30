@@ -86,7 +86,7 @@ namespace RoslynAnalyzer
             G = 80;
             G += G;
         }
-        void x(int x, bool flag)
+        void x(int x, bool flag, int ali)
         {
 
         }

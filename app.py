@@ -6,7 +6,8 @@ from flask_codemirror import CodeMirror
 from flask_bootstrap import Bootstrap
 import subprocess
 import json
-from sys import platform
+#from sys import platform
+import os
 
 SECRET_KEY = 'secret!'
 CODEMIRROR_LANGUAGES = ['clike', 'html']
@@ -43,13 +44,14 @@ def index():
             text = inputText.replace('\r\n', '\n')
             f.write(text)
         
-        if platform == "win32" or platform == "cygwin":
+        if os.name == "nt":
           output = subprocess.check_output(["./RoslynProject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
           output2 = subprocess.check_output(["./CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
         else:
           output = subprocess.check_output(["mono", "RoslynProject/RoslynAnalyzer/bin/Debug/RoslynAnalyzer.exe", "FormInput.cs"]).decode("utf-8")
-          output2 = subprocess.check_output(["mono", "CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
-
+#          start_xorg = subprocess.check_output(["startx","&&","mono", "CocoProject/bin/Debug/CocoCompiler2.exe", "FormInput.cs"]).decode("utf-8")
+          output2 = subprocess.check_output(["./linuxcoco.sh",]).decode("utf-8")
+#          output2 = '{"Output":"It works on windows server not linux we will implement it"}'
         csharp_output_string = output
         coco_output = output2
         print(output2)
