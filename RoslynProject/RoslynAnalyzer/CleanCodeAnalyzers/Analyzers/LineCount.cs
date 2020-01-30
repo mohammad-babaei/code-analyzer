@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using RoslynAnalyzer.CleanCodeAnalyzers.Data;
 
 namespace RoslynAnalyzer.CleanCodeAnalyzers.Analyzers
@@ -17,9 +18,10 @@ namespace RoslynAnalyzer.CleanCodeAnalyzers.Analyzers
 
         public override AnalyzeResult analyze()
         {
-            var text = syntaxTree.GetText().ToString();
+            var root = syntaxTree.GetRoot();
 
-            var lineCount = Regex.Matches(text, "\r").Count;
+
+            var lineCount = root.DescendantNodesAndSelf().OfType<CompilationUnitSyntax>().First().ToString().Split('\n').Length - 1;
 
             string format_warning = "Total file lines: {0}";
             List<Warning> warnings = new List<Warning>
